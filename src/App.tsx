@@ -9,6 +9,7 @@ import { ExhibitionGallery } from './components/ExhibitionGallery';
 import { ChariotSection } from './components/ChariotSection';
 import { CodexSection } from './components/CodexSection';
 import { MasksSection } from './components/MasksSection';
+import { HistoricalTimeline } from './components/HistoricalTimeline';
 import { KenosisChamber } from './components/KenosisChamber';
 import { MobileOnboarding } from './components/MobileOnboarding';
 import { MobileBottomNav } from './components/MobileBottomNav';
@@ -74,6 +75,7 @@ export default function App() {
       <main className="relative z-10">
         <HeroSection />
         <ChainSection />
+        <HistoricalTimeline />
         <DiagnosticSection />
         <InnerLightStudio />
         <CosmicOrrery />

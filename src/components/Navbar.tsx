@@ -30,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   // Smooth active section tracking
   useEffect(() => {
-    const sections = ['the-chain', 'the-mirror', 'cosmic-orrery', 'inner-light-studio', 'the-chariot', 'the-codex'];
+    const sections = ['the-chain', 'historical-timeline', 'the-mirror', 'cosmic-orrery', 'inner-light-studio', 'the-chariot', 'the-codex'];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -61,6 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navLinks = [
     { id: 'the-chain', label: 'The Chain' },
+    { id: 'historical-timeline', label: 'Epochs' },
     { id: 'the-mirror', label: 'The Inquest' },
     { id: 'cosmic-orrery', label: 'Cosmic Orrery' },
     { id: 'inner-light-studio', label: 'Inner Light 9:16', highlight: true },
