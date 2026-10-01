@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Newsreader", "Cormorant Garamond", Georgia, serif;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-archival: "Cinzel", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #faf9f6;
+    color: #1c1917;
+    overflow-x: hidden;
+    line-height: 1.6;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "kern";
+  }
+
+  /* Section anchor landing clearance for fixed navbar */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  h1, h2, h3, .font-serif-heading {
+    font-family: var(--font-serif);
+    letter-spacing: -0.018em;
+    color: #0c0a09;
+    text-wrap: balance;
+  }
+
+  .font-display-title {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  .font-archival {
+    font-family: var(--font-archival);
+    letter-spacing: 0.08em;
+  }
+
+  /* Smooth GPU-accelerated elements */
+  canvas, .gpu-smooth {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Scholastic marginalia: quiet hairline rule with refined book leading */
+.marginalia {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #57534e;
+  border-left: 2px solid #ea580c;
+  padding-left: 1rem;
+}
+
+/* Museum editorial hairline surfaces with smooth physics */
+.hairline-card {
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 24px rgba(234, 88, 12, 0.03);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hairline-card:hover {
+  border-color: rgba(234, 88, 12, 0.3);
+  box-shadow: 0 4px 24px rgba(234, 88, 12, 0.07);
+}
+
+.hairline-card-active {
+  background: #ffffff;
+  border: 1px solid #ea580c;
+  box-shadow: 0 4px 20px rgba(234, 88, 12, 0.08);
+}
+
+/* Radiant gold & solar amber typography gradient */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 45%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Smooth button base utility */
+.btn-smooth {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.btn-smooth:active {
+  transform: scale(0.97);
+}
+
+/* Custom minimal parchment scrollbar with smooth drag response */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #faf9f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d6d3d1;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}

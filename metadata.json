@@ -1,0 +1,6 @@
+{
+  "name": "The Driver of God: The Anatomy of Self-Will",
+  "description": "An immersive psycho-spiritual inquiry into who drives our understanding of the divine, tracing the ancient and psychological chain of Pride, Self-Will, Self-Centeredness, and Playing God.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
