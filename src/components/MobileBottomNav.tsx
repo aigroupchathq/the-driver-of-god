@@ -1,5 +1,5 @@
-import React from 'react';
 import { Compass, Scale, Film, Orbit, Sparkles } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface MobileBottomNavProps {
   onOpenKenosis: () => void;
@@ -22,6 +22,8 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
     }
   };
 
+  const { language } = useLanguage();
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#faf9f6]/95 backdrop-blur-lg border-t border-orange-200 pb-safe shadow-lg">
       <div className="grid grid-cols-5 items-center h-16 px-1">
@@ -32,7 +34,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           className="flex flex-col items-center justify-center min-h-[44px] text-stone-600 hover:text-orange-600 active:scale-95 transition-all font-medium"
         >
           <Compass className="w-5 h-5 mb-1" />
-          <span className="text-[10px] font-mono tracking-tight">The Dial</span>
+          <span className="text-[10px] font-mono tracking-tight">{language === 'hi' ? 'चक्र' : 'The Dial'}</span>
         </a>
 
         {/* Nav Item 2: Inquest */}
@@ -42,7 +44,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           className="flex flex-col items-center justify-center min-h-[44px] text-stone-600 hover:text-orange-600 active:scale-95 transition-all font-medium"
         >
           <Scale className="w-5 h-5 mb-1" />
-          <span className="text-[10px] font-mono tracking-tight">Inquest</span>
+          <span className="text-[10px] font-mono tracking-tight">{language === 'hi' ? 'परीक्षा' : 'Inquest'}</span>
         </a>
 
         {/* Nav Item 3: 9:16 Inner Light Studio */}
@@ -52,7 +54,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           className="flex flex-col items-center justify-center min-h-[44px] text-orange-600 active:scale-95 transition-all font-bold"
         >
           <Film className="w-5 h-5 mb-1 text-orange-500" />
-          <span className="text-[10px] font-mono tracking-tight font-bold">9:16 Film</span>
+          <span className="text-[10px] font-mono tracking-tight font-bold">{language === 'hi' ? '9:16 फ़िल्म' : '9:16 Film'}</span>
         </a>
 
         {/* Nav Item 4: Cosmic Orrery */}
@@ -62,7 +64,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           className="flex flex-col items-center justify-center min-h-[44px] text-stone-600 hover:text-orange-600 active:scale-95 transition-all font-medium"
         >
           <Orbit className="w-5 h-5 mb-1" />
-          <span className="text-[10px] font-mono tracking-tight">Cosmos</span>
+          <span className="text-[10px] font-mono tracking-tight">{language === 'hi' ? 'ब्रह्मांड' : 'Cosmos'}</span>
         </a>
 
         {/* Nav Item 5: Kenosis Chamber */}
@@ -71,7 +73,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           className="flex flex-col items-center justify-center min-h-[44px] text-orange-600 active:scale-95 transition-all font-bold"
         >
           <Sparkles className="w-5 h-5 mb-1 text-orange-500" />
-          <span className="text-[10px] font-mono tracking-tight font-bold">Kenosis</span>
+          <span className="text-[10px] font-mono tracking-tight font-bold">{language === 'hi' ? 'केनोसिस' : 'Kenosis'}</span>
         </button>
       </div>
     </div>

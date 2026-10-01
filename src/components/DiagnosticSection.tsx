@@ -21,8 +21,10 @@ import {
 import { DriverArchetype, ChainLinkKey, DiagnosticOption } from '../types';
 import { progressionStorage, DiagnosticSessionRecord } from '../utils/progressionStorage';
 import { CosmicBackdropElement } from './CosmicBackdropElement';
+import { useLanguage } from '../context/LanguageContext';
 
 export const DiagnosticSection: React.FC = () => {
+  const { t, language } = useLanguage();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -158,15 +160,15 @@ Quote: ${results.primaryArchetype.sacredTextQuote.quote} (${results.primaryArche
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-stone-500 mb-3">
             <Scale className="w-4 h-4 text-orange-600" />
-            <span>Liber III: The Inquest of the Conscience</span>
+            <span>{t.diagnosticTag}</span>
             <span aria-hidden="true">·</span>
-            <span>Psychological Self-Inventory</span>
+            <span>{language === 'hi' ? 'गहन आत्म-विश्लेषण' : 'Psychological Self-Inventory'}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-stone-900 font-normal tracking-tight mb-4">
-            The Inquest of the Driver
+            {t.diagnosticTitle}
           </h2>
           <p className="text-base sm:text-lg text-stone-700 font-serif leading-relaxed">
-            Eight psychological crucibles designed to strip away pious rationalization, tracing the exact coordinate where your ego seizes the helm of the sacred. Tracks your Self-Will progression across multiple sessions.
+            {t.diagnosticSubtitle}
           </p>
         </div>
 

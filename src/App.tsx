@@ -16,8 +16,9 @@ import { MobileBottomNav } from './components/MobileBottomNav';
 import { Footer } from './components/Footer';
 import { CosmicCanvas } from './components/CosmicCanvas';
 import { soundEngine } from './utils/audio';
+import { LanguageProvider } from './context/LanguageContext';
 
-export default function App() {
+function AppContent() {
   const [isKenosisOpen, setIsKenosisOpen] = useState<boolean>(false);
   const [activeSound, setActiveSound] = useState<boolean>(false);
   const [isOnboardingOpen, setIsOnboardingOpen] = useState<boolean>(false);
@@ -110,5 +111,13 @@ export default function App() {
         onToggleSound={toggleSound}
       />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }

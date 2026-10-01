@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { LanguageToggle } from './LanguageToggle';
 
 interface NavbarProps {
   onOpenKenosis: () => void;
@@ -14,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleSound,
   onOpenOnboarding
 }) => {
+  const { t } = useLanguage();
   const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [activeSection, setActiveSection] = useState<string>('');
 
@@ -60,17 +63,17 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   const navLinks = [
-    { id: 'the-chain', label: 'The Chain' },
-    { id: 'historical-timeline', label: 'Epochs' },
-    { id: 'the-mirror', label: 'The Inquest' },
-    { id: 'cosmic-orrery', label: 'Cosmic Orrery' },
-    { id: 'inner-light-studio', label: 'Inner Light 9:16', highlight: true },
-    { id: 'the-chariot', label: 'The Chariot' },
-    { id: 'the-codex', label: 'The Codex' }
+    { id: 'the-chain', label: t.navChain },
+    { id: 'historical-timeline', label: t.navTimeline },
+    { id: 'the-mirror', label: t.navInquest },
+    { id: 'cosmic-orrery', label: t.navOrrery },
+    { id: 'inner-light-studio', label: t.navStudio, highlight: true },
+    { id: 'the-chariot', label: t.navChariot },
+    { id: 'the-codex', label: t.navCodex }
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-[#faf9f6]/95 backdrop-blur-md border-b border-[#e7e5e4] px-6 py-3.5 transition-colors">
+    <header className="sticky top-0 z-40 bg-[#faf9f6]/95 backdrop-blur-md border-b border-[#e7e5e4] px-4 sm:px-6 py-3 transition-colors">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Zone 1: Single text element brand wordmark with archival font */}
         <a 
@@ -79,14 +82,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className="text-base sm:text-lg font-archival font-semibold tracking-wider text-stone-900 hover:text-orange-600 transition-colors uppercase whitespace-nowrap flex items-center gap-2"
+          className="text-base sm:text-lg font-serif font-semibold tracking-wider text-stone-900 hover:text-orange-600 transition-colors uppercase whitespace-nowrap flex items-center gap-2"
         >
           <span className="w-2 h-2 rounded-full bg-orange-600 inline-block animate-pulse" />
-          <span>The Driver of God</span>
+          <span>{t.brandTitle}</span>
         </a>
 
         {/* Zone 2: 4-6 clean text navigation links with smooth hover and active state */}
-        <nav className="hidden lg:flex items-center gap-7 text-xs font-sans tracking-wider uppercase font-medium text-stone-600">
+        <nav className="hidden lg:flex items-center gap-6 text-xs font-sans tracking-wider uppercase font-medium text-stone-600">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -109,31 +112,35 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Zone 3: Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Language Selector: English / हिन्दी */}
+          <LanguageToggle />
+
           <button
             onClick={onOpenOnboarding}
-            className="lg:hidden px-2.5 py-1 text-xs font-mono text-stone-700 bg-stone-100 hover:bg-stone-200 rounded transition-colors btn-smooth"
+            className="lg:hidden px-2 py-1 text-xs font-mono text-stone-700 bg-stone-100 hover:bg-stone-200 rounded transition-colors btn-smooth"
             title="Open guide"
           >
-            Guide
+            {t.navGuideBtn}
           </button>
 
           <button
             onClick={onToggleSound}
             aria-label={activeSound ? 'Mute acoustic harmonic drone' : 'Play acoustic harmonic drone'}
-            className="btn-smooth flex items-center gap-1.5 px-3 py-1.5 text-xs text-stone-600 hover:text-stone-900 bg-stone-100 hover:bg-stone-200/80 rounded transition-colors"
+            className="btn-smooth flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs text-stone-600 hover:text-stone-900 bg-stone-100 hover:bg-stone-200/80 rounded transition-colors"
             title={activeSound ? 'Mute soundscape' : 'Listen to 108Hz harmonic drone'}
           >
             {activeSound ? <Volume2 className="w-3.5 h-3.5 text-orange-600" /> : <VolumeX className="w-3.5 h-3.5 text-stone-400" />}
-            <span className="hidden sm:inline font-mono">{activeSound ? 'Audio On' : 'Audio'}</span>
+            <span className="hidden sm:inline font-mono">{activeSound ? t.navAudioOn : t.navAudioOff}</span>
           </button>
 
           <button
             onClick={onOpenKenosis}
-            className="btn-smooth flex items-center gap-1.5 px-4 py-2 text-xs font-sans uppercase tracking-wider font-semibold text-white bg-orange-600 hover:bg-orange-700 rounded transition-colors shadow-xs whitespace-nowrap"
+            className="btn-smooth flex items-center gap-1.5 px-3 sm:px-4 py-2 text-xs font-sans uppercase tracking-wider font-semibold text-white bg-orange-600 hover:bg-orange-700 rounded transition-colors shadow-xs whitespace-nowrap"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Kenosis Chamber</span>
+            <span className="hidden sm:inline">{t.navKenosisBtn}</span>
+            <span className="sm:hidden">Kenosis</span>
           </button>
         </div>
       </div>

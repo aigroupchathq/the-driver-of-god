@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Compass, Info, CheckCircle2, AlertOctagon, Sparkles, Play, Pause, FastForward } from 'lucide-react';
 import { CosmicBackdropElement } from './CosmicBackdropElement';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ChariotComponent {
   id: string;
@@ -61,6 +62,7 @@ const CHARIOT_PARTS: ChariotComponent[] = [
 ];
 
 export const ChariotSection: React.FC = () => {
+  const { t } = useLanguage();
   const [selectedPartId, setSelectedPartId] = useState<string>('driver');
   const [isHijacked, setIsHijacked] = useState<boolean>(true);
   const [isPlayingMotion, setIsPlayingMotion] = useState<boolean>(true);
@@ -259,13 +261,13 @@ export const ChariotSection: React.FC = () => {
         <div className="max-w-3xl mb-8">
           <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-orange-600 font-bold mb-3">
             <Compass className="w-4 h-4 text-orange-500" />
-            <span>Vedic Cognitive Anatomy</span>
+            <span>{t.chariotTag}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-slate-900 font-normal tracking-tight mb-3">
-            The Chariot of the Mind (Kaṭha Upaniṣad)
+            {t.chariotTitle}
           </h2>
           <p className="text-base sm:text-lg text-slate-700 font-sans leading-relaxed">
-            The ancient sages mapped the mind as a moving carriage. Who holds the reins? When the false ego (Ahamkara) grabs them, the horses bolt toward disaster. When the higher mind (Buddhi) surrenders to the Witness (Atman), the ride is peaceful.
+            {t.chariotSubtitle}
           </p>
         </div>
 

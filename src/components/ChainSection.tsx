@@ -3,8 +3,10 @@ import { CHAIN_LINKS, CHAIN_SCENARIOS, ChainScenario } from '../data/chainData';
 import { ShieldCheck } from 'lucide-react';
 import { ScratchMirror } from './ScratchMirror';
 import { CosmicBackdropElement } from './CosmicBackdropElement';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ChainSection: React.FC = () => {
+  const { t, language } = useLanguage();
   const [selectedLinkIndex, setSelectedLinkIndex] = useState<number>(0);
   const [viewMode, setViewMode] = useState<'descent' | 'reversal'>('descent');
   const [activeScenarioId, setActiveScenarioId] = useState<string>('unanswered-prayer');
@@ -29,15 +31,15 @@ export const ChainSection: React.FC = () => {
         {/* Curatorial Header */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-stone-500 mb-3">
-            <span>Liber II: The Architecture of the Usurpation</span>
+            <span>{t.chainLiber}</span>
             <span aria-hidden="true">·</span>
-            <span>The Fourfold Descent</span>
+            <span>{language === 'hi' ? 'चार-चरणीय पतन' : 'The Fourfold Descent'}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-stone-900 font-normal tracking-tight mb-4">
-            The Anatomy of the Catastrophe
+            {t.chainTitle}
           </h2>
           <p className="text-base sm:text-lg text-stone-700 font-serif leading-relaxed">
-            The transition from worship to idolatrous self-exaltation is not an overt blasphemy; it is a fourfold seamless psychological corruption. Once Pride blinds the eye, Self-Will seizes the reins, Self-Centeredness shrinks the cosmos, and the ego quietly crowns itself.
+            {t.chainSubtext}
           </p>
         </div>
 
@@ -52,7 +54,7 @@ export const ChainSection: React.FC = () => {
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
-              The Descent: Chain of Self-Will
+              {t.chainDescentTab}
             </button>
             <button
               onClick={() => setViewMode('reversal')}
@@ -62,7 +64,7 @@ export const ChainSection: React.FC = () => {
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
-              The Kenosis Reversal: Ancient Antidote
+              {t.chainReversalTab}
             </button>
           </div>
 

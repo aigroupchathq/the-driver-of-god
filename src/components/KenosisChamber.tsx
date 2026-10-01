@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, Volume2, VolumeX, Sparkles, Check, ArrowRight, RotateCcw } from 'lucide-react';
 import { soundEngine } from '../utils/audio';
 import { CosmicBackdropElement } from './CosmicBackdropElement';
+import { useLanguage } from '../context/LanguageContext';
 
 interface KenosisChamberProps {
   isOpen: boolean;
@@ -53,18 +54,63 @@ const KENOSIS_STAGES = [
   }
 ];
 
+const KENOSIS_STAGES_HI = [
+  {
+    step: 1,
+    title: 'निश्चय और वैचारिक हठ का त्याग',
+    targetChain: 'प्रथम चरण का समाधान: अहंकार (Pride)',
+    ancientTerm: 'अपोफैटिक मौन / शून्यता (Śūnyatā)',
+    contemplation:
+      'गहराई से स्वीकार करें कि आपके सभी विचार और सिद्धांत केवल अनंत चंद्रमा की ओर संकेत करने वाली उंगली हैं। उंगली चंद्रमा नहीं है।',
+    breathInstruction: 'अज्ञेय की अनंतता को श्वास में भरें; वैचारिक सुरक्षा के संघर्ष को श्वास छोड़ते हुए विसर्जित करें।',
+    promptAction: 'मैं अपनी बुद्धि से पूरे ब्रह्मांड को नियंत्रित करने का हठ त्यागता हूँ।'
+  },
+  {
+    step: 2,
+    title: 'भींची हुई मुट्ठी का समर्पण',
+    targetChain: 'द्वितीय चरण का समाधान: आत्म-संकल्प (Self-Will)',
+    ancientTerm: 'प्रपत्ति / तस्लीम (Prapatti / Taslim)',
+    contemplation:
+      'अपने हाथों और नाभि के तनाव को महसूस करें। यह जीवन, लोगों और ईश्वर को अपने समय-सारणी पर चलाने का दबाव है। मुट्ठी खोलकर देखें।',
+    breathInstruction: 'विश्वास और ग्रहणशीलता की श्वास लें; सब कुछ नियंत्रित करने की व्याकुलता को बाहर छोड़ें।',
+    promptAction: 'आज जीवन जो भी लेकर आए, उस पर से मैं अपना वीटो और विरोध त्यागता हूँ।'
+  },
+  {
+    step: 3,
+    title: 'स्वयं को केंद्र से हटाना',
+    targetChain: 'तृतीय चरण का समाधान: आत्म-केन्द्रितता (Self-Centeredness)',
+    ancientTerm: 'भक्ति / निष्काम भाव (Bhakti / Agape)',
+    contemplation:
+      'मंच के केंद्र से हट जाएं। यह ब्रह्मांड केवल आपको सुख-दुख देने के लिए रची गई कथा नहीं है। आप इस विराट संगीत का एक सुंदर सुर हैं।',
+    breathInstruction: 'समस्त सृष्टि के प्रति आदर की श्वास लें; निरंतर आत्म-चिंता की पीड़ा को बाहर निकालें।',
+    promptAction: 'मैं पवित्र आत्म-विस्मृति को अपनाता हूँ और सृष्टि को निष्काम विस्मय से देखता हूँ।'
+  },
+  {
+    step: 4,
+    title: 'सर्वोच्च सिंहासन का त्याग',
+    targetChain: 'चतुर्थ चरण का समाधान: ईश्वर बनने का भ्रम (Playing God)',
+    ancientTerm: 'साक्षी भाव / जीव स्थिति (The Silence of the Creature)',
+    contemplation:
+      'न्यायाधीश के आसन से नीचे उतरें। हर त्रासदी, हर विरोधी और स्वयं पर से अपने निर्णय का हथौड़ा रख दें। एक विनम्र प्राणी के रूप में पृथ्वी पर बैठें।',
+    breathInstruction: 'श्रद्धा और कृतज्ञता की श्वास लें; अहंकार के सभी झूठे मुकुट उतार दें।',
+    promptAction: 'सर्वोच्च सत्ता केवल अनिर्वचनीय ईश्वर की है। मैं कृतज्ञता की धूलि में अपना स्थान लेता हूँ।'
+  }
+];
+
 export const KenosisChamber: React.FC<KenosisChamberProps> = ({
   isOpen,
   onClose,
   activeSound,
   onToggleSound
 }) => {
+  const { t, language } = useLanguage();
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const [personalRelinquishment, setPersonalRelinquishment] = useState<string>('');
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [breathPhase, setBreathPhase] = useState<'Inhale' | 'Hold' | 'Exhale'>('Inhale');
 
-  const currentStage = KENOSIS_STAGES[currentStepIndex];
+  const activeStages = language === 'hi' ? KENOSIS_STAGES_HI : KENOSIS_STAGES;
+  const currentStage = activeStages[currentStepIndex];
 
   // Paced Breathing Loop
   useEffect(() => {
@@ -115,7 +161,7 @@ export const KenosisChamber: React.FC<KenosisChamberProps> = ({
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse" />
             <span className="text-xs font-mono uppercase tracking-widest text-orange-700 font-bold">
-              Kenosis Chamber: Unmaking Self-Will
+              {language === 'hi' ? 'केनोसिस ध्यान कक्ष: आत्म-संकल्प का विसर्जन' : 'Kenosis Chamber: Unmaking Self-Will'}
             </span>
           </div>
 
@@ -142,7 +188,7 @@ export const KenosisChamber: React.FC<KenosisChamberProps> = ({
             {/* Step Progress */}
             <div className="flex items-center justify-between text-xs font-mono text-slate-500 mb-6 font-semibold">
               <span>
-                Stage 0{currentStage.step} of 0{KENOSIS_STAGES.length}
+                {language === 'hi' ? `चरण ०${currentStage.step} (कुल ०${activeStages.length})` : `Stage 0${currentStage.step} of 0${activeStages.length}`}
               </span>
               <span className="text-orange-600 font-serif italic">
                 {currentStage.ancientTerm}
@@ -179,8 +225,10 @@ export const KenosisChamber: React.FC<KenosisChamberProps> = ({
                 </svg>
 
                 <div className="relative z-10 text-center font-mono text-xs uppercase tracking-widest text-slate-800">
-                  <span className="text-orange-600 font-bold block text-base">{breathPhase}</span>
-                  <span className="text-[10px] text-slate-500 font-medium">Kenotic Rhythm</span>
+                  <span className="text-orange-600 font-bold block text-sm sm:text-base">
+                    {breathPhase === 'Inhale' ? t.kenosisBreathInhale : breathPhase === 'Hold' ? t.kenosisBreathHold : t.kenosisBreathExhale}
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-medium">{language === 'hi' ? 'श्वास ताल' : 'Kenotic Rhythm'}</span>
                 </div>
               </div>
             </div>
@@ -211,7 +259,7 @@ export const KenosisChamber: React.FC<KenosisChamberProps> = ({
                 <ArrowRight className="w-4 h-4" />
               </button>
               <span className="text-[11px] font-mono text-slate-500 font-medium">
-                Sounds the singing bowl bell & steps forward
+                {language === 'hi' ? 'घंटी की ध्वनि बजाएं और आगे बढ़ें' : 'Sounds the singing bowl bell & steps forward'}
               </span>
             </div>
           </div>
@@ -223,10 +271,10 @@ export const KenosisChamber: React.FC<KenosisChamberProps> = ({
             </div>
 
             <h3 className="text-2xl sm:text-3xl font-serif text-slate-900 font-normal mb-2">
-              The Driver Has Stepped Down
+              {t.kenosisCompleteTitle}
             </h3>
             <p className="text-sm font-serif italic text-slate-600 mb-6">
-              “When I was quiet, the world revealed its Maker. When I was loud with prayers and demands, I heard only the echo of my own ego.”
+              {t.kenosisCompleteText}
             </p>
 
             <div className="bg-orange-50/60 p-4 rounded-2xl border border-orange-200 text-left mb-6">
@@ -234,13 +282,13 @@ export const KenosisChamber: React.FC<KenosisChamberProps> = ({
                 htmlFor="relinquishment-input"
                 className="text-xs font-mono uppercase tracking-wider text-orange-700 font-bold block mb-2"
               >
-                Seal Your Inscription (Optional):
+                {language === 'hi' ? 'अपना संकल्प या समर्पण दर्ज करें (वैकल्पिक):' : 'Seal Your Inscription (Optional):'}
               </label>
               <textarea
                 id="relinquishment-input"
                 value={personalRelinquishment}
                 onChange={(e) => setPersonalRelinquishment(e.target.value)}
-                placeholder="What subtle demand, resentment, or doctrinal pride are you placing on the altar of silence right now?"
+                placeholder={language === 'hi' ? 'आप अपने किस सूक्ष्म हठ, क्रोध या अहंकार को मौन की वेदी पर अर्पित कर रहे हैं?' : 'What subtle demand, resentment, or doctrinal pride are you placing on the altar of silence right now?'}
                 rows={3}
                 className="w-full p-3 bg-white border border-orange-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-orange-500 font-serif"
               />
@@ -252,13 +300,13 @@ export const KenosisChamber: React.FC<KenosisChamberProps> = ({
                 className="px-4 py-2 text-xs font-mono text-slate-600 hover:text-slate-900 bg-white border border-slate-200 rounded-lg transition-colors flex items-center gap-1.5 font-medium"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
-                <span>Repeat Contemplation</span>
+                <span>{language === 'hi' ? 'पुनः ध्यान करें' : 'Repeat Contemplation'}</span>
               </button>
               <button
                 onClick={onClose}
                 className="px-6 py-2 text-xs font-mono uppercase font-bold text-white bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 rounded-lg shadow-sm transition-colors"
               >
-                Return to Surface World
+                {t.kenosisReturnBtn}
               </button>
             </div>
           </div>
